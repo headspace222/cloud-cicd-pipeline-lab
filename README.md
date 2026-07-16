@@ -55,6 +55,33 @@ still default to.
   same free-tier profile as the storage accounts used throughout this
   portfolio
 
+## Screenshots
+
+Evidence of the OIDC trust setup, the pipeline running, and the deployed resource - captured against a live Azure subscription and GitHub repository during this build. Files live in docs/screenshots/.
+
+**1. OIDC Setup Complete**
+![OIDC setup output](docs/screenshots/01-oidc-setup-output.png)
+The one-time setup script's final output: the App Registration created, its federated credential configured, and Contributor access assigned scoped to a single resource group - the four values needed to wire GitHub up to Azure with no stored secret anywhere.
+
+**2. GitHub Repository Variables Configured**
+![GitHub variables configured](docs/screenshots/02-github-variables-configured.png)
+All five values stored as repository Variables, not Secrets - a deliberate choice, since none of them are secret in an OIDC-authenticated flow.
+
+**3. Pipeline Run Succeeded**
+![Pipeline run succeeded](docs/screenshots/03-pipeline-run-succeeded.png)
+The GitHub Actions workflow completing end to end: checkout, OIDC login, Bicep validation, and deployment, all green.
+
+**4. Deployment Log Detail**
+![Deployment log detail](docs/screenshots/04-deployment-log-detail.png)
+The expanded "Deploy Bicep template" step, showing the actual az deployment group create output - proof the deployment genuinely ran, not just that the job reported success.
+
+**5. Resource Verified in Azure**
+![Resource verified](docs/screenshots/05-resource-verified.png)
+The deployed storage account confirmed directly via PowerShell, including the DeployedBy: github-actions-oidc tag - visible proof this resource came from the pipeline, not a manual portal click.
+
+**6. Pipeline Repeatability Proven**
+![Second run succeeded](docs/screenshots/06-second-run-succeeded.png)
+A second, independent run triggered by a small template change - succeeding cleanly with no manual intervention, demonstrating this is a genuinely repeatable deployment process rather than a one-off that happened to work.
 ## Setup Guide
 
 Full steps: [`docs/setup-guide.md`](docs/setup-guide.md).
