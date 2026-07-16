@@ -29,6 +29,7 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
     Owner: 'jane'
     Environment: environmentTag
     DeployedBy: 'github-actions-oidc'
+    LastUpdated: 'PipelineRepeatabilityTest'
   }
   properties: {
     minimumTlsVersion: 'TLS1_2'
